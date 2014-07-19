@@ -1,24 +1,24 @@
-# Public: KeyRemap4MacBook private.xml file
+# Public: Karabiner private.xml file
 #
 # content - the contents of the file
 # source  - the source for the file
 #
 # either content or source must be specified.
-define keyremap4macbook::private_xml(
+define karabiner::private_xml(
   $content = undef,
   $source  = undef,
   $ensure  = 'present'
 ) {
-  include keyremap4macbook::config
+  include karabiner::config
 
-  file { $keyremap4macbook::config::private_xml_dir:
+  file { $karabiner::config::private_xml_dir:
     ensure => 'directory'
   }
 
-  file { $keyremap4macbook::config::private_xml_path:
+  file { $karabiner::config::private_xml_path:
     ensure  => $ensure,
     content => $content,
     source  => $source,
-    require => File[$keyremap4macbook::config::private_xml_dir]
+    require => File[$karabiner::config::private_xml_dir]
   }
 }

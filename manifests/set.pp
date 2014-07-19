@@ -6,21 +6,21 @@
 # Examples
 #
 #   # set the parameter.keyoverlaidmodifier_timeout to 300
-#   keyremap4macbook::set { 'parameter.keyoverlaidmodifier_timeout':
+#   karabiner::set { 'parameter.keyoverlaidmodifier_timeout':
 #     value => '300'
 #   }
 #
 #   # explicitly specify the identifier
-#   keyremap4macbook::set { 'foobar':
+#   karabiner::set { 'foobar':
 #     identifier => 'parameter.keyoverlaidmodifier_timeout',
 #     value      => '300'
 #   }
-define keyremap4macbook::set(
+define karabiner::set(
   $value,
   $identifier = $title
 ) {
 
-  keyremap4macbook::exec { "keyremap4macbook::set ${identifier} ${value}":
+  karabiner::exec { "karabiner::set ${identifier} ${value}":
     command => "set ${identifier} ${value}",
     unless  => "${identifier}=${value}"
   }

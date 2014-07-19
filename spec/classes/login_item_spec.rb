@@ -1,25 +1,25 @@
 require 'spec_helper'
 
-describe 'keyremap4macbook::login_item' do
-  let(:version) { '9.3.0' }
+describe 'karabiner::login_item' do
+  let(:version) { '10.0.0' }
 
   it do
-    should include_class('keyremap4macbook::config')
+    should include_class('karabiner::config')
 
-    should contain_exec("launch keyremap4macbook#{version}").with({
-      :command     => '/usr/bin/open /Applications/KeyRemap4MacBook.app',
+    should contain_exec("launch karabiner#{version}").with({
+      :command     => '/usr/bin/open /Applications/Karabiner.app',
       :refreshonly => true,
-      :subscribe   => "Package[KeyRemap4MacBook_#{version}]",
-      :require     => 'Osx_login_item[KeyRemap4MacBook]'
+      :subscribe   => "Package[Karabiner_#{version}]",
+      :require     => 'Osx_login_item[Karabiner]'
     })
   end
 
   context 'with ensure defaulted' do
     it do
-      should contain_osx_login_item('KeyRemap4MacBook').with({
+      should contain_osx_login_item('Karabiner').with({
         :ensure  => 'present',
-        :path    => '/Applications/KeyRemap4MacBook.app',
-        :require => "Package[KeyRemap4MacBook_#{version}]"
+        :path    => '/Applications/Karabiner.app',
+        :require => "Package[Karabiner_#{version}]"
       })
     end
   end
@@ -32,10 +32,10 @@ describe 'keyremap4macbook::login_item' do
     end
 
     it do
-      should contain_osx_login_item('KeyRemap4MacBook').with({
+      should contain_osx_login_item('Karabiner').with({
         :ensure  => 'present',
-        :path    => '/Applications/KeyRemap4MacBook.app',
-        :require => "Package[KeyRemap4MacBook_#{version}]"
+        :path    => '/Applications/Karabiner.app',
+        :require => "Package[Karabiner_#{version}]"
       })
     end
   end
@@ -48,10 +48,10 @@ describe 'keyremap4macbook::login_item' do
     end
 
     it do
-      should contain_osx_login_item('KeyRemap4MacBook').with({
+      should contain_osx_login_item('Karabiner').with({
         :ensure  => 'absent',
-        :path    => '/Applications/KeyRemap4MacBook.app',
-        :require => "Package[KeyRemap4MacBook_#{version}]"
+        :path    => '/Applications/Karabiner.app',
+        :require => "Package[Karabiner_#{version}]"
       })
     end
   end

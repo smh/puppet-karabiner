@@ -1,18 +1,18 @@
 require 'spec_helper'
 
-describe 'keyremap4macbook::exec' do
-  let(:version) { '9.3.0' }
-  cli = '/Applications/KeyRemap4MacBook.app/Contents/Applications/KeyRemap4MacBook_cli.app/Contents/MacOS/KeyRemap4MacBook_cli'
+describe 'karabiner::exec' do
+  let(:version) { '10.0.0' }
+  cli = '/Applications/Karabiner.app/Contents/Library/bin/karabiner'
 
   context 'with defaults' do
     let(:title) { 'list' }
 
     it do
-      should include_class('keyremap4macbook::config')
+      should include_class('karabiner::config')
 
-      should contain_exec('keyremap4macbook::exec list').with({
+      should contain_exec('karabiner::exec list').with({
         :command => "#{cli} list",
-        :require => "Exec[launch keyremap4macbook#{version}]"
+        :require => "Exec[launch karabiner#{version}]"
       })
     end
   end
@@ -26,9 +26,9 @@ describe 'keyremap4macbook::exec' do
     end
 
     it do
-      should contain_exec('keyremap4macbook::exec select 1').with({
+      should contain_exec('karabiner::exec select 1').with({
         :command => "#{cli} select 1",
-        :require => "Exec[launch keyremap4macbook#{version}]",
+        :require => "Exec[launch karabiner#{version}]",
         :unless  => nil
       })
     end
@@ -44,9 +44,9 @@ describe 'keyremap4macbook::exec' do
     end
 
     it do
-      should contain_exec('keyremap4macbook::exec select 1').with({
+      should contain_exec('karabiner::exec select 1').with({
         :command => "#{cli} select 1",
-        :require => "Exec[launch keyremap4macbook#{version}]",
+        :require => "Exec[launch karabiner#{version}]",
         :unless => "#{cli} changed | grep select=1"
       })
     end
@@ -62,9 +62,9 @@ describe 'keyremap4macbook::exec' do
     end
 
     it do
-      should contain_exec('keyremap4macbook::exec select 1').with({
+      should contain_exec('karabiner::exec select 1').with({
         :command => "#{cli} select 1",
-        :require => "Exec[launch keyremap4macbook#{version}]",
+        :require => "Exec[launch karabiner#{version}]",
         :onlyif => "#{cli} changed | grep select=1"
       })
     end

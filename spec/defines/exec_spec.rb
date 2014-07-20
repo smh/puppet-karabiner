@@ -8,7 +8,7 @@ describe 'karabiner::exec' do
     let(:title) { 'list' }
 
     it do
-      should include_class('karabiner::config')
+      should contain_class('karabiner::config')
 
       should contain_exec('karabiner::exec list').with({
         :command => "#{cli} list",

@@ -4,7 +4,7 @@ describe 'karabiner' do
   let(:version) { '10.0.0' }
 
   it do
-    should include_class('karabiner::config')
+    should contain_class('karabiner::config')
 
     should contain_package("Karabiner_#{version}").with({
       :ensure   => 'installed',

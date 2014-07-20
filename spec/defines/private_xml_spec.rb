@@ -9,7 +9,7 @@ describe 'karabiner::private_xml' do
   end
 
   it do
-    should include_class('karabiner::config')
+    should contain_class('karabiner::config')
   end
 
   context 'with source set to whatever' do

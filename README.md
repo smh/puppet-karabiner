@@ -1,8 +1,11 @@
 # Karabiner Puppet Module for Boxen
 
-[![Build Status](https://travis-ci.org/boxen/puppet-karabiner.png?branch=master)](https://travis-ci.org/boxen/puppet-karabiner)
+[![Build Status](https://travis-ci.org/smh/puppet-karabiner.png?branch=master)](https://travis-ci.org/smh/puppet-karabiner)
 
 Installs [Karabiner](http://pqrs.org/macosx/karabiner/index.html.en) on your Mac.
+
+**Note**: This module was previously known as [puppet-keyremap4macbook](https://github.com/boxen/puppet-keyremap4macbook).
+This is a continuation of that module to accomodate the name change as of `10.0.0`.
 
 ## Usage
 

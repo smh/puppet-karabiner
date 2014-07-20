@@ -6,18 +6,18 @@
 # Examples
 #
 #   # enable the controlL2controlL_escape parameter
-#   keyremap4macbook::remap { 'controlL2controlL_escape': }
+#   karabiner::remap { 'controlL2controlL_escape': }
 #
 #   # disable the controlL2controlL_escape parameter
-#   keyremap4macbook::remap { 'controlL2controlL_escape': }
+#   karabiner::remap { 'controlL2controlL_escape': }
 #     ensure => 'absent'
 #   }
 #
 #   # explicitly specify the parameter
-#   keyremap4macbook::remap { 'foobar': }
+#   karabiner::remap { 'foobar': }
 #     identifier => 'controlL2controlL_escape'
 #   }
-define keyremap4macbook::remap(
+define karabiner::remap(
   $identifier = $title,
   $ensure = 'present'
 ) {
@@ -26,7 +26,7 @@ define keyremap4macbook::remap(
     'present': { $enable = 'enable' }
     'absent': { $enable = 'disable' }
     default: {
-      fail('Define[keyremap4macbook::remap]: invalid ensure value')
+      fail('Define[karabiner::remap]: invalid ensure value')
     }
   }
 
@@ -40,7 +40,7 @@ define keyremap4macbook::remap(
     default  => undef
   }
 
-  keyremap4macbook::exec { "keyremap4macbook::remap::${enable} ${identifier}":
+  karabiner::exec { "karabiner::remap::${enable} ${identifier}":
     command => "${enable} remap.${identifier}",
     unless  => $unless_enabled,
     onlyif  => $onlyif_enabled

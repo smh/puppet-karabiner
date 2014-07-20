@@ -1,20 +1,20 @@
-# Public: Installs KeyRemap4MacBook
+# Public: Installs Karabiner
 #
 # Usage:
 #
-#   include keyremap4macbook
+#   include karabiner
 #
 # Parameters:
 #
 #   launch_on_login - will automatically launch and login. Defaults to
 #                     true. Set this to false if you want to avoid
 #                     automatically launching.
-class keyremap4macbook {
-  include keyremap4macbook::config
+class karabiner {
+  include karabiner::config
 
-  package { "KeyRemap4MacBook_${keyremap4macbook::config::version}":
+  package { "Karabiner_${karabiner::config::version}":
     ensure   => installed,
-    source   => $keyremap4macbook::config::dmg_url,
+    source   => $karabiner::config::dmg_url,
     provider => 'pkgdmg'
   }
 }

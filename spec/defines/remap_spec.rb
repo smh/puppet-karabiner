@@ -1,11 +1,11 @@
 require 'spec_helper'
 
-describe 'keyremap4macbook::remap' do
+describe 'karabiner::remap' do
   let(:title) { 'foobar' }
 
   context 'with defaults' do
     it do
-      should contain_keyremap4macbook__exec('keyremap4macbook::remap::enable foobar').with({
+      should contain_karabiner__exec('karabiner::remap::enable foobar').with({
         :command => 'enable remap.foobar',
         :unless  => 'remap.foobar=1'
       })
@@ -19,7 +19,7 @@ describe 'keyremap4macbook::remap' do
       }
     end
     it do
-      should contain_keyremap4macbook__exec('keyremap4macbook::remap::enable xyz').with({
+      should contain_karabiner__exec('karabiner::remap::enable xyz').with({
         :command => 'enable remap.xyz',
         :unless  => 'remap.xyz=1'
       })
@@ -34,7 +34,7 @@ describe 'keyremap4macbook::remap' do
     end
 
     it do
-      should contain_keyremap4macbook__exec('keyremap4macbook::remap::enable foobar').with({
+      should contain_karabiner__exec('karabiner::remap::enable foobar').with({
         :command => 'enable remap.foobar',
         :unless  => 'remap.foobar=1'
       })
@@ -50,7 +50,7 @@ describe 'keyremap4macbook::remap' do
     end
 
     it do
-      should contain_keyremap4macbook__exec('keyremap4macbook::remap::disable barfoo').with({
+      should contain_karabiner__exec('karabiner::remap::disable barfoo').with({
         :command => 'disable remap.barfoo',
         :onlyif => 'remap.barfoo=1'
       })

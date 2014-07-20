@@ -1,10 +1,10 @@
 require 'spec_helper'
 
-describe 'keyremap4macbook::enable' do
+describe 'karabiner::enable' do
   let(:title) { 'foobar' }
 
   it do
-    should contain_keyremap4macbook__exec('keyremap4macbook::enable foobar').
+    should contain_karabiner__exec('karabiner::enable foobar').
       with({ :command => "enable foobar" })
   end
 end

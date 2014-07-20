@@ -5,33 +5,33 @@
 # Examples
 #
 #   # set the repeat.wait parameter to 30
-#   keyremap4macbook::exec { 'set repeat.wait 30': }
+#   karabiner::exec { 'set repeat.wait 30': }
 #
 #   # don't execute unless repeat.wait is already set to 30
-#   keyremap4macbook::exec { 'set repeat.wait 30':
+#   karabiner::exec { 'set repeat.wait 30':
 #     unless => 'repeat.wait=30'
 #   }
 #
 #   # explicitly specify the commandline
-#   keyremap4macbook::exec { 'foobar':
+#   karabiner::exec { 'foobar':
 #     command => 'enable remap.shiftL2commandL'
 #   }
-define keyremap4macbook::exec($command = $title, $unless = undef, $onlyif = undef) {
-  include keyremap4macbook::config
+define karabiner::exec($command = $title, $unless = undef, $onlyif = undef) {
+  include karabiner::config
 
   $unless_changed = $unless ? {
     undef   => undef,
-    default => "${keyremap4macbook::config::cli} changed | grep ${unless}"
+    default => "${karabiner::config::cli} changed | grep ${unless}"
   }
 
   $onlyif_changed = $onlyif ? {
     undef   => undef,
-    default => "${keyremap4macbook::config::cli} changed | grep ${onlyif}"
+    default => "${karabiner::config::cli} changed | grep ${onlyif}"
   }
 
-  exec { "keyremap4macbook::exec ${command}":
-    command => "${keyremap4macbook::config::cli} ${command}",
-    require => Exec["launch keyremap4macbook${keyremap4macbook::config::version}"],
+  exec { "karabiner::exec ${command}":
+    command => "${karabiner::config::cli} ${command}",
+    require => Exec["launch karabiner${karabiner::config::version}"],
     unless  => $unless_changed,
     onlyif  => $onlyif_changed
   }

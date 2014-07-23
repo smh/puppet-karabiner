@@ -1,6 +1,6 @@
 # Karabiner Puppet Module for Boxen
 
-[![Build Status](https://travis-ci.org/smh/puppet-karabiner.png?branch=master)](https://travis-ci.org/smh/puppet-karabiner)
+[![Build Status](https://travis-ci.org/boxen/puppet-karabiner.svg?branch=master)](https://travis-ci.org/boxen/puppet-karabiner)
 
 Installs [Karabiner](http://pqrs.org/macosx/karabiner/index.html.en) on your Mac.
 

@@ -5,13 +5,6 @@ describe 'karabiner::login_item' do
 
   it do
     should contain_class('karabiner::config')
-
-    should contain_exec("launch karabiner#{version}").with({
-      :command     => '/usr/bin/open /Applications/Karabiner.app',
-      :refreshonly => true,
-      :subscribe   => "Package[Karabiner_#{version}]",
-      :require     => 'Osx_login_item[Karabiner]'
-    })
   end
 
   context 'with ensure defaulted' do

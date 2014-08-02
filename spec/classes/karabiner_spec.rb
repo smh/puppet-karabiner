@@ -11,5 +11,25 @@ describe 'karabiner' do
       :source   => "https://pqrs.org/osx/karabiner/files/Karabiner-#{version}.dmg",
       :provider => 'pkgdmg'
     })
+
+    should contain_class('karabiner::login_item').with({ :ensure => :present })
+  end
+
+  context 'with launch_on_login set to true' do
+    let(:params) do
+      { :launch_on_login => true }
+    end
+    it do
+      should contain_class('karabiner::login_item').with({ :ensure => :present })
+    end
+  end
+
+  context 'with launch_on_login set to false' do
+    let(:params) do
+      { :launch_on_login => false }
+    end
+    it do
+      should contain_class('karabiner::login_item').with({ :ensure => :absent })
+    end
   end
 end

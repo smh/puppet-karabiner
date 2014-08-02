@@ -29,4 +29,10 @@ class karabiner(
   class { 'karabiner::login_item':
     ensure => $launch_on_login_ensure
   }
+
+  exec { "launch karabiner${karabiner::config::version}":
+    command     => "/usr/bin/open ${karabiner::config::app}",
+    refreshonly => true,
+    subscribe   => Package["Karabiner_${karabiner::config::version}"]
+  }
 }

@@ -17,6 +17,7 @@
 #     command => 'enable remap.shiftL2commandL'
 #   }
 define karabiner::exec($command = $title, $unless = undef, $onlyif = undef) {
+  require karabiner
   include karabiner::config
 
   $unless_changed = $unless ? {

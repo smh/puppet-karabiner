@@ -6,6 +6,12 @@ describe 'karabiner' do
   it do
     should contain_class('karabiner::config')
 
+    should contain_exec("launch karabiner#{version}").with({
+      :command     => '/usr/bin/open /Applications/Karabiner.app',
+      :refreshonly => true,
+      :subscribe   => "Package[Karabiner_#{version}]"
+    })
+
     should contain_package("Karabiner_#{version}").with({
       :ensure   => 'installed',
       :source   => "https://pqrs.org/osx/karabiner/files/Karabiner-#{version}.dmg",

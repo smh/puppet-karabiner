@@ -17,11 +17,13 @@
 #   }
 define karabiner::set(
   $value,
-  $identifier = $title
+  $identifier = $title,
+  $profile = 'Default'
 ) {
 
   karabiner::exec { "karabiner::set ${identifier} ${value}":
-    command => "set ${identifier} ${value}",
-    unless  => "${identifier}=${value}"
+    command      => "set ${identifier} ${value}",
+    unless       => "${identifier}=${value}",
+    exec_require => "select_by_name ${profile}"
   }
 }

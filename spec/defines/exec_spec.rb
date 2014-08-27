@@ -4,7 +4,7 @@ describe 'karabiner::exec' do
   let(:version) { '10.2.0' }
   cli = '/Applications/Karabiner.app/Contents/Library/bin/karabiner'
 
-  context 'with defaults' do
+  context 'with command list' do
     let(:title) { 'list' }
 
     it do
@@ -21,51 +21,85 @@ describe 'karabiner::exec' do
     let(:title) { 'foobar' }
     let(:params) do
       {
-        :command => 'select 1'
+        :command => 'select 1',
+        :exec_require => 'append foo'
       }
     end
 
     it do
       should contain_exec('karabiner::exec select 1').with({
         :command => "#{cli} select 1",
-        :require => "Exec[launch karabiner#{version}]",
-        :unless  => nil
+        :require => [ "Exec[launch karabiner#{version}]", "Exec[karabiner::exec append foo]" ],
+        :unless  => "#{cli} selected | grep 1",
       })
     end
   end
 
-  context 'with unless set to select=1' do
+  context 'with unless set to select_by_name foo' do
     let(:title) { 'foobar' }
     let(:params) do
       {
-        :command => 'select 1',
-        :unless  => 'select=1'
+        :command => 'select_by_name foo',
+        :unless  => 1,
       }
     end
 
     it do
-      should contain_exec('karabiner::exec select 1').with({
-        :command => "#{cli} select 1",
+      should contain_exec('karabiner::exec select_by_name foo').with({
+        :command => "#{cli} select_by_name foo",
         :require => "Exec[launch karabiner#{version}]",
-        :unless => "#{cli} changed | grep select=1"
+        :unless  => "#{cli} selected | grep 1"
       })
     end
   end
 
-  context 'with onlyif set to select=1' do
+  context 'with command append' do
     let(:title) { 'foobar' }
     let(:params) do
       {
-        :command => 'select 1',
-        :onlyif  => 'select=1'
+        :command => 'append foo',
       }
     end
 
     it do
-      should contain_exec('karabiner::exec select 1').with({
-        :command => "#{cli} select 1",
+      should contain_exec('karabiner::exec append foo').with({
+        :command => "#{cli} append foo",
         :require => "Exec[launch karabiner#{version}]",
-        :onlyif => "#{cli} changed | grep select=1"
+        :unless  => "#{cli} list | grep '^[0-9]*: foo$'"
+      })
+    end
+  end
+
+  context 'with command rename' do
+    let(:title) { 'foobar' }
+    let(:params) do
+      {
+        :command => 'rename 1 bar',
+      }
+    end
+
+    it do
+      should contain_exec('karabiner::exec rename 1 bar').with({
+        :command => "#{cli} rename 1 bar",
+        :require => "Exec[launch karabiner#{version}]",
+        :unless  => "#{cli} list | grep '^1: bar$'"
+      })
+    end
+  end
+
+  context 'with command delete' do
+    let(:title) { 'foobar' }
+    let(:params) do
+      {
+        :command => 'delete 1',
+      }
+    end
+
+    it do
+      should contain_exec('karabiner::exec delete 1').with({
+        :command => "#{cli} delete 1",
+        :require => "Exec[launch karabiner#{version}]",
+        :unless  => "#{cli} selected | grep -v 1"
       })
     end
   end

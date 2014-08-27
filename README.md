@@ -27,6 +27,15 @@ karabiner::set{ 'parameter.keyoverlaidmodifier_timeout':
 karabiner::private_xml{ 'private.xml':
   content => '<some>xml</some>'
 }
+
+# create & select the profile 'foo' (default profile is 'Default')
+karabiner::profile{ 'foo': }
+
+# set the parameter.keyoverlaidmodifier_timeout to 300 in profile 'foo'
+karabiner::set{ 'parameter.keyoverlaidmodifier_timeout':
+  value   => '300',
+  profile => 'foo'
+}
 ```
 
 ## Required Puppet Modules

@@ -52,7 +52,7 @@ describe 'karabiner::remap' do
     it do
       should contain_karabiner__exec('karabiner::remap::disable barfoo').with({
         :command => 'disable remap.barfoo',
-        :onlyif => 'remap.barfoo=1'
+        :onlyif  => 'remap.barfoo=1'
       })
     end
   end

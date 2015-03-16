@@ -5,7 +5,7 @@
 # $cli - location of command-line interface to the application
 # $private_xml_path - location of private.xml
 class karabiner::config {
-  $version = '10.2.0'
+  $version = '10.6.0'
   $base_url = 'https://pqrs.org/osx/karabiner/files'
   $dmg_url = "${base_url}/Karabiner-${version}.dmg"
   $app = '/Applications/Karabiner.app'
